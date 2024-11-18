@@ -1,3 +1,6 @@
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -11,7 +14,14 @@ import logger from './middleware/logger.js';
 
 // import routes
 import userRoutes from './routes/user.js';
-import bookRoutes from './routes/book.js';
+import productRoutes from './routes/product.js';
+import itemRoutes from './routes/item.js';
+import paymentRoutes from './routes/payment.js';
+import { dirname } from 'path';
+
+// construct the path
+const __filename = fileURLToPath(import.meta.url);
+const PATH = dirname(__filename);
 
 // load environment variables
 dotenv.config();
@@ -48,9 +58,14 @@ if (process.env.NODE_ENV === 'development') {
     app.use(logger);
 }
 
+// serve static files
+app.use(express.static(path.join(PATH, 'dist')));
+
 // use routes
 app.use('/api', userRoutes);
-app.use('/api', bookRoutes);
+app.use('/api', productRoutes);
+app.use('/api', itemRoutes);
+app.use('/api', paymentRoutes);
 
 // handle 404
 app.use('*', (req, res) => {

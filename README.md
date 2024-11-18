@@ -34,33 +34,33 @@ Ensure the following tools are installed on your machine:
 
 1. **Navigate to the backend directory**:
 
-    ```bash
-    cd backend
-    ```
+   ```bash
+   cd backend
+   ```
 
 2. **Install dependencies**:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 3. **Set up environment variables**:
 
    Create a `.env` file in the `backend` directory with the following keys:
 
-    ```plaintext
-     PORT=5004
-        CORS_ORIGINS=http://localhost:5173
-        TOKEN_SECRET=YOUR_TOKEN_SECRET
-        CONNECTION_URI=YOUR_CLUSTER_URI
-        STRIPE_SECRET_KEY=YOUR_STRIPE_SECRET_KEY
-    ```
+   ```plaintext
+    PORT=5004
+       CORS_ORIGINS=http://localhost:5173
+       TOKEN_SECRET=YOUR_TOKEN_SECRET
+       CONNECTION_URI=YOUR_CLUSTER_URI
+       STRIPE_SECRET_KEY=YOUR_STRIPE_SECRET_KEY
+   ```
 
 4. **Run the development server**:
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
    The backend API will now be running at `http://localhost:5004`.
 
@@ -73,33 +73,33 @@ Ensure the following tools are installed on your machine:
 
 1. **Navigate to the frontend directory**:
 
-    ```bash
-    cd frontend
-    ```
+   ```bash
+   cd frontend
+   ```
 
 2. **Install dependencies**:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 3. **Set up environment variables**:
 
    Create `.env` and `.env.production` files in the `frontend` directory:
 
-    ```plaintext
-    # .env (for development)
-    VITE_API_URL=http://localhost:5004/api
+   ```plaintext
+   # .env (for development)
+   VITE_API_URL=http://localhost:5004/api
 
-    # .env.production (for production)
-    VITE_API_URL=/api
-    ```
+   # .env.production (for production)
+   VITE_API_URL=/api
+   ```
 
 4. **Run the React development server**:
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
    The frontend will be available at `http://localhost:5173`.
 
@@ -112,23 +112,24 @@ Ensure the following tools are installed on your machine:
 
 1. **Start the backend server**:
 
-    ```bash
-    cd backend
-    npm run dev
-    ```
+   ```bash
+   cd backend
+   npm run dev
+   ```
 
 2. **Start the frontend server**:
 
-    ```bash
-    cd frontend
-    npm run dev
-    ```
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
 Visit `http://localhost:5173` to view the app. The frontend will proxy API requests to the backend server running on `http://localhost:5004`.
 
 ## Environment Configurations
 
 - **Backend Environment Variables**:
+
   - `PORT` – Port for the backend server (default: 5004).
   - `TOKEN_SECRET` – Secret key for JWT authentication.
   - `CONNECTION_URI` – MongoDB connection string.
