@@ -1,6 +1,7 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+import helmet from 'helmet'; 
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -17,7 +18,6 @@ import userRoutes from './routes/user.js';
 import productRoutes from './routes/product.js';
 import itemRoutes from './routes/item.js';
 import paymentRoutes from './routes/payment.js';
-import { dirname } from 'path';
 
 // construct the path
 const __filename = fileURLToPath(import.meta.url);
