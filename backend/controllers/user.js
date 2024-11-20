@@ -11,6 +11,7 @@ import hashPassword from '../utils/hashPassword.js';
 
 const userControllers = {
     register: async (req, res) => {
+        console.log(req)
         const { email, userName, password, rePassword } = req.body;
 
         try {
@@ -23,13 +24,13 @@ const userControllers = {
             const isValidEmail = validateEmail(email);
             const isValidPassword = validatePassword(password);
             const isValidUserName = validateUserName(userName);
-            const doMatchPassword = matchPasswords(password, rePassword);
+            const doMatchPassword = matchPasswords(password, rePassword);            
 
             if (
-                (isValidEmail,
-                isValidPassword,
-                isValidUserName,
-                doMatchPassword)
+                isValidEmail &&
+                isValidPassword &&
+                isValidUserName &&
+                doMatchPassword
             ) {
                 // hash the password
                 const hashedPassword = hashPassword(password);
@@ -49,7 +50,9 @@ const userControllers = {
                     .json({ message: 'Invalid email or password' });
             }
         } catch (err) {
-            res.status(500).json(`Server error ${err}`);
+            res.status(500).json({
+                message: 'An internal server error occurred'
+            });
         }
     },
     login: async (req, res) => {
@@ -65,7 +68,9 @@ const userControllers = {
             // validate the password
             bcrypt.compare(password, userExist.password, (err, isValid) => {
                 if (err) {
-                    return res.status(500).json(`Server error ${err}`);
+                    return res.status(500).json({
+                        message: 'An internal server error occurred'
+                    });
                 }
                 // create token
                 if (isValid) {
@@ -86,7 +91,9 @@ const userControllers = {
                 }
             });
         } catch (err) {
-            res.status(500).json(`Server error ${err}`);
+            res.status(500).json({
+                message: 'An internal server error occurred'
+            });
         }
     },
     logout: (req, res) => {
