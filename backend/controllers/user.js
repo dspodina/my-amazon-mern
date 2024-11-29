@@ -10,8 +10,37 @@ import matchPasswords from '../utils/matchPasswords.js';
 import hashPassword from '../utils/hashPassword.js';
 
 const userControllers = {
+    checkAdmin: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const user = await User.findOne({ _id: id });
+            if (!user) {
+                res.status(400).json({ message: 'User not found!' });
+            }
+            if (user.role === 'admin') {
+                res.status(200).json({ message: 'Hi admin', isAdmin: true });
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'err.message' });
+        }
+    },
+    getUser: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const user = await User.findOne({ _id: id });
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(400).json({ message: 'User not found' });
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'err.message' });
+        }
+    },
     register: async (req, res) => {
-        console.log(req)
+        console.log(req);
         const { email, userName, password, rePassword } = req.body;
 
         try {
@@ -24,7 +53,7 @@ const userControllers = {
             const isValidEmail = validateEmail(email);
             const isValidPassword = validatePassword(password);
             const isValidUserName = validateUserName(userName);
-            const doMatchPassword = matchPasswords(password, rePassword);            
+            const doMatchPassword = matchPasswords(password, rePassword);
 
             if (
                 isValidEmail &&
